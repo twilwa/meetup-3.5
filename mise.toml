@@ -61,6 +61,10 @@ ln -sf "$py" "$PWD/.tools/bin/python3"
 description = "Run Trunk checks"
 run = "trunk check --all"
 
+[tasks.test]
+description = "Run the Supernova Snake starter contract suite"
+run = "node --test"
+
 [tasks.fmt]
 description = "Run Trunk formatter"
 run = "trunk fmt"
