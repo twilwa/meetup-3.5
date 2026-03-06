@@ -3,26 +3,26 @@
 // openspec/changes/build-supernova-snake-wave-1/specs/run-progression-and-challenges/spec.md
 // openspec/changes/build-supernova-snake-wave-1/specs/spectacle-and-accessibility-layer/spec.md
 
-const test = require("node:test");
-const assert = require("node:assert/strict");
+import test from "node:test";
+import assert from "node:assert/strict";
 
-const {
+import {
+  buildDailyRun,
+  buildSeededRun,
+  evaluateRunRewards,
+} from "../src/supernova-snake/contracts/progression.ts";
+import {
+  buildTutorialBeatPlan,
+  getHudModel,
   getShellFlow,
   mapInputPrompt,
-  getHudModel,
-  buildTutorialBeatPlan,
-} = require("../src/supernova-snake/contracts/shell");
-const {
-  buildSeededRun,
-  buildDailyRun,
-  evaluateRunRewards,
-} = require("../src/supernova-snake/contracts/progression");
-const {
-  createSpectacleState,
+} from "../src/supernova-snake/contracts/shell.ts";
+import {
   applyAccessibilityPreset,
+  createSpectacleState,
   selectFrameEffects,
-} = require("../src/supernova-snake/contracts/spectacle");
-const { createRunFixture } = require("./helpers/supernova-snake-fixtures");
+} from "../src/supernova-snake/contracts/spectacle.ts";
+import { createRunFixture } from "./helpers/supernova-snake-fixtures.ts";
 
 test("shell flow preserves one-more-run cadence and exposes retry quickly", () => {
   const flow = getShellFlow({
@@ -67,7 +67,12 @@ test("seeded progression produces replayable daily runs and breadth-first reward
 
   assert.deepEqual(seededA, seededB);
   assert.equal(rewards.unlockType, "breadth");
-  assert.equal(["biome", "mutation", "challenge", "cosmetic"].includes(rewards.unlockCategory), true);
+  assert.equal(
+    ["biome", "mutation", "challenge", "cosmetic"].includes(
+      rewards.unlockCategory,
+    ),
+    true,
+  );
 });
 
 test("spectacle presets reduce effect intensity without touching simulation difficulty", () => {
@@ -76,11 +81,19 @@ test("spectacle presets reduce effect intensity without touching simulation diff
     comboThresholdCrossed: true,
     imminentWarning: "hazard-armed",
   });
-  const reduced = applyAccessibilityPreset(spectacle, { preset: "reduced-sensory" });
+  const reduced = applyAccessibilityPreset(spectacle, {
+    preset: "reduced-sensory",
+  });
   const frame = selectFrameEffects(reduced, { performanceBudget: "low" });
 
-  assert.equal(reduced.settings.flashIntensity < spectacle.settings.flashIntensity, true);
-  assert.equal(reduced.settings.screenShake < spectacle.settings.screenShake, true);
+  assert.equal(
+    reduced.settings.flashIntensity < spectacle.settings.flashIntensity,
+    true,
+  );
+  assert.equal(
+    reduced.settings.screenShake < spectacle.settings.screenShake,
+    true,
+  );
   assert.equal(reduced.simulationDifficulty, spectacle.simulationDifficulty);
   assert.equal(frame.decorativeEffectsReduced, true);
 });

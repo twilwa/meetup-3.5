@@ -2,19 +2,19 @@
 // openspec/changes/build-supernova-snake-wave-1/specs/phase-food-and-combo-system/spec.md
 // openspec/changes/build-supernova-snake-wave-1/specs/run-progression-and-challenges/spec.md
 
-const test = require("node:test");
-const assert = require("node:assert/strict");
+import test from "node:test";
+import assert from "node:assert/strict";
 
-const {
-  validateContentManifest,
-  spawnPickup,
+import {
   extendComboChain,
+  spawnPickup,
   triggerReactivePickup,
-} = require("../src/supernova-snake/contracts/content");
-const {
+  validateContentManifest,
+} from "../src/supernova-snake/contracts/content.ts";
+import {
   createContentManifestFixture,
   createRunFixture,
-} = require("./helpers/supernova-snake-fixtures");
+} from "./helpers/supernova-snake-fixtures.ts";
 
 test("content manifest validates the core wave 1 food, hazard, biome, and challenge schema", () => {
   const manifest = createContentManifestFixture();

@@ -1,17 +1,17 @@
-const test = require("node:test");
-const assert = require("node:assert/strict");
+import test from "node:test";
+import assert from "node:assert/strict";
 
-const coreLoop = require("../src/supernova-snake/contracts/core-loop");
-const content = require("../src/supernova-snake/contracts/content");
-const mutations = require("../src/supernova-snake/contracts/mutations");
-const arenas = require("../src/supernova-snake/contracts/arenas");
-const shell = require("../src/supernova-snake/contracts/shell");
-const progression = require("../src/supernova-snake/contracts/progression");
-const spectacle = require("../src/supernova-snake/contracts/spectacle");
-const {
-  createRunFixture,
+import * as coreLoop from "../src/supernova-snake/contracts/core-loop.ts";
+import * as content from "../src/supernova-snake/contracts/content.ts";
+import * as mutations from "../src/supernova-snake/contracts/mutations.ts";
+import * as arenas from "../src/supernova-snake/contracts/arenas.ts";
+import * as shell from "../src/supernova-snake/contracts/shell.ts";
+import * as progression from "../src/supernova-snake/contracts/progression.ts";
+import * as spectacle from "../src/supernova-snake/contracts/spectacle.ts";
+import {
   createContentManifestFixture,
-} = require("./helpers/supernova-snake-fixtures");
+  createRunFixture,
+} from "./helpers/supernova-snake-fixtures.ts";
 
 test("contract harness exposes the planned Supernova Snake seams", () => {
   assert.equal(typeof coreLoop.createRunState, "function");

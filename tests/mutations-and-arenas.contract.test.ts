@@ -2,25 +2,25 @@
 // openspec/changes/build-supernova-snake-wave-1/specs/mutation-powers/spec.md
 // openspec/changes/build-supernova-snake-wave-1/specs/living-arenas-and-hazards/spec.md
 
-const test = require("node:test");
-const assert = require("node:assert/strict");
+import test from "node:test";
+import assert from "node:assert/strict";
 
-const {
-  earnMutationCharge,
-  activateMutation,
-  tickMutationTimers,
-  resolveMutationPriority,
-} = require("../src/supernova-snake/contracts/mutations");
-const {
-  selectBiome,
+import {
+  advanceArena,
   armHazard,
   recordTrailStep,
-  advanceArena,
-} = require("../src/supernova-snake/contracts/arenas");
-const {
+  selectBiome,
+} from "../src/supernova-snake/contracts/arenas.ts";
+import {
+  activateMutation,
+  earnMutationCharge,
+  resolveMutationPriority,
+  tickMutationTimers,
+} from "../src/supernova-snake/contracts/mutations.ts";
+import {
   createContentManifestFixture,
   createRunFixture,
-} = require("./helpers/supernova-snake-fixtures");
+} from "./helpers/supernova-snake-fixtures.ts";
 
 test("mutation charges unlock through explicit published triggers", () => {
   const run = createRunFixture();
@@ -44,8 +44,11 @@ test("active mutations warn before expiry and end deterministically", () => {
   });
   const nextRun = tickMutationTimers(activeRun);
 
-  assert.equal(nextRun.warnings.includes("phase-shift-expiring"), true);
-  assert.equal(nextRun.activeMutations.some((mutation) => mutation.id === "phase-shift"), false);
+  assert.equal(nextRun.warnings?.includes("phase-shift-expiring"), true);
+  assert.equal(
+    nextRun.activeMutations.some((mutation) => mutation.id === "phase-shift"),
+    false,
+  );
 });
 
 test("mutation priority resolves one collision outcome deterministically", () => {
@@ -80,6 +83,11 @@ test("hazards telegraph before becoming lethal and trail steps mutate the arena"
   const trailed = recordTrailStep(telegraphed, { cell: "4,2" });
   const advanced = advanceArena(trailed, { tick: run.tick + 1 });
 
-  assert.equal(advanced.arena.hazards.some((hazard) => hazard.cell === "7,7" && hazard.state === "telegraph"), true);
+  assert.equal(
+    advanced.arena.hazards.some(
+      (hazard) => hazard.cell === "7,7" && hazard.state === "telegraph",
+    ),
+    true,
+  );
   assert.equal(advanced.arena.trailCells.includes("4,2"), true);
 });

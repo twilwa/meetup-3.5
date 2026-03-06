@@ -61,9 +61,13 @@ ln -sf "$py" "$PWD/.tools/bin/python3"
 description = "Run Trunk checks"
 run = "trunk check --all"
 
+[tasks.typecheck]
+description = "Typecheck the Supernova Snake starter contract suite"
+run = "tsc --noEmit"
+
 [tasks.test]
 description = "Run the Supernova Snake starter contract suite"
-run = "node --test"
+run = "node --test tests/*.test.ts"
 
 [tasks.fmt]
 description = "Run Trunk formatter"

@@ -1,4 +1,9 @@
-function createRunFixture() {
+import type {
+  ContentManifest,
+  RunState,
+} from "../../src/supernova-snake/contracts/types.ts";
+
+export function createRunFixture(): RunState {
   return {
     seed: "nova-alpha-001",
     tick: 41,
@@ -22,12 +27,7 @@ function createRunFixture() {
     arena: {
       biomeId: "nebula-drift",
       size: { width: 12, height: 12 },
-      occupiedCells: [
-        "3,2",
-        "3,3",
-        "3,4",
-        "5,5",
-      ],
+      occupiedCells: ["3,2", "3,3", "3,4", "5,5"],
       lethalCells: ["5,5"],
       trailCells: [],
       hazards: [
@@ -56,7 +56,7 @@ function createRunFixture() {
   };
 }
 
-function createContentManifestFixture() {
+export function createContentManifestFixture(): ContentManifest {
   return {
     foods: [
       {
@@ -104,8 +104,3 @@ function createContentManifestFixture() {
     ],
   };
 }
-
-module.exports = {
-  createRunFixture,
-  createContentManifestFixture,
-};
