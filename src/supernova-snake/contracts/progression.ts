@@ -1,3 +1,39 @@
+<<<<<<< ours
+// ABOUTME: Progression system for seeded runs, daily runs, and reward evaluation
+// ABOUTME: Implements run generation and reward unlock logic
+
+import type {
+  BuildDailyRunInput,
+  BuildSeededRunInput,
+  RunRewardInput,
+  RunRewards,
+  RunState,
+  SeededRun,
+} from "./types.ts";
+
+export function buildSeededRun(input: BuildSeededRunInput): SeededRun {
+  return { seed: input.seed };
+}
+
+export function buildDailyRun(input: BuildDailyRunInput): SeededRun {
+  return { seed: `daily-${input.date}` };
+}
+
+export function evaluateRunRewards(
+  run: RunState,
+  input: RunRewardInput,
+): RunRewards {
+  const categories = ["biome", "mutation", "challenge", "cosmetic"] as const;
+  const randomIndex = Math.floor(Math.random() * categories.length);
+  const unlockCategory = categories[randomIndex] ?? categories[0];
+
+  return {
+    unlockType: "breadth",
+    unlockCategory,
+  };
+}
+|||||||
+=======
 // ABOUTME: Progression system for seeded runs, daily runs, and reward evaluation
 // ABOUTME: Implements run generation and reward unlock logic
 
@@ -30,3 +66,4 @@ export function evaluateRunRewards(
     unlockCategory: categories[randomIndex],
   };
 }
+>>>>>>> theirs

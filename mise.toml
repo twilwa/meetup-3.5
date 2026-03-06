@@ -61,6 +61,31 @@ ln -sf "$py" "$PWD/.tools/bin/python3"
 description = "Run Trunk checks"
 run = "trunk check --all"
 
+<<<<<<< ours
+[tasks.typecheck]
+description = "Typecheck the Supernova Snake starter contract suite"
+run = "tsc --noEmit"
+
+[tasks.build]
+description = "Build the Supernova Snake browser slice"
+run = '''
+set -euo pipefail
+mkdir -p dist
+bun build ./src/supernova-snake/browser/main.ts --outdir ./dist --target browser
+cp ./public/index.html ./dist/index.html
+cp ./public/app.css ./dist/app.css
+'''
+
+[tasks.serve]
+description = "Serve the Supernova Snake browser slice locally on port 4173"
+run = "python3 -m http.server 4173 --directory dist"
+
+[tasks.test]
+description = "Run the Supernova Snake starter contract suite"
+run = "node --test tests/*.test.ts"
+
+||||||| ancestor
+=======
 [tasks.typecheck]
 description = "Typecheck the Supernova Snake starter contract suite"
 run = "tsc --noEmit"
@@ -69,6 +94,7 @@ run = "tsc --noEmit"
 description = "Run the Supernova Snake starter contract suite"
 run = "node --test tests/*.test.ts"
 
+>>>>>>> theirs
 [tasks.fmt]
 description = "Run Trunk formatter"
 run = "trunk fmt"
