@@ -1,0 +1,196 @@
+:root {
+  color-scheme: dark;
+  --bg: #030712;
+  --panel: rgba(7, 17, 31, 0.88);
+  --panel-border: rgba(97, 244, 255, 0.22);
+  --text: #edf6ff;
+  --muted: #9ab0c9;
+  --accent: #61f4ff;
+  --warm: #ffd166;
+  --biome-accent: #61f4ff;
+  --biome-accent-soft: rgba(97, 244, 255, 0.28);
+  --biome-bg-a: #07111f;
+  --biome-bg-b: #12315f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--biome-accent) 28%, transparent), transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(255, 209, 102, 0.15), transparent 20%),
+    linear-gradient(180deg, #040916 0%, #030712 100%);
+}
+
+#app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.shell {
+  width: min(980px, 100%);
+  display: grid;
+  gap: 24px;
+}
+
+.hero,
+.panel {
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--biome-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 0.96;
+}
+
+.subhead {
+  margin: 12px 0 0;
+  max-width: 48ch;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 336px) minmax(0, 1fr);
+  gap: 24px;
+}
+
+.board-wrap {
+  position: relative;
+}
+
+#board {
+  width: 100%;
+  height: auto;
+  border: 1px solid color-mix(in srgb, var(--biome-accent) 40%, transparent);
+  background: #07111f;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 24px 80px rgba(0, 0, 0, 0.45),
+    0 0 80px var(--biome-accent-soft);
+}
+
+.board-overlay {
+  position: absolute;
+  inset: 12px 14px auto auto;
+  pointer-events: none;
+}
+
+.pickup-label {
+  display: inline-flex;
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--biome-accent) 40%, transparent);
+  background: rgba(3, 7, 18, 0.75);
+  color: var(--text);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel {
+  padding: 22px;
+  display: grid;
+  gap: 24px;
+}
+
+.stats {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.stats div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(154, 176, 201, 0.16);
+}
+
+dt {
+  color: var(--muted);
+}
+
+dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.copy {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.play-button {
+  border: 0;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--biome-accent), #4ea8de);
+  color: #03131f;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.secondary-button {
+  border: 1px solid color-mix(in srgb, var(--biome-accent) 35%, transparent);
+  padding: 13px 16px;
+  background: rgba(3, 7, 18, 0.6);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.play-button:hover {
+  filter: brightness(1.08);
+}
+
+.secondary-button:hover {
+  border-color: var(--biome-accent);
+}
+
+@media (max-width: 820px) {
+  #app {
+    padding: 18px;
+  }
+
+  .hero,
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    gap: 18px;
+    align-items: start;
+  }
+}
