@@ -84,6 +84,9 @@ export function queueTurn(run: RunState, input: TurnInput): RunState {
 export function advanceTick(run: RunState): RunState {
   const { body } = run.snake;
   const head = body[0];
+  if (!head) {
+    return run;
+  }
   let newHead: Cell;
   
   switch (run.heading) {

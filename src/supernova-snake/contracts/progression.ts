@@ -24,9 +24,10 @@ export function evaluateRunRewards(
 ): RunRewards {
   const categories = ["biome", "mutation", "challenge", "cosmetic"] as const;
   const randomIndex = Math.floor(Math.random() * categories.length);
+  const unlockCategory = categories[randomIndex] ?? categories[0];
 
   return {
     unlockType: "breadth",
-    unlockCategory: categories[randomIndex],
+    unlockCategory,
   };
 }
