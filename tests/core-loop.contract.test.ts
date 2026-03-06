@@ -1,34 +1,34 @@
 // Spec source:
 // openspec/changes/build-supernova-snake-wave-1/specs/arcade-run-loop/spec.md
 
-const test = require("node:test");
-const assert = require("node:assert/strict");
+import test from "node:test";
+import assert from "node:assert/strict";
 
-const {
+import {
+  advanceTick,
+  buildRunResults,
   createRunState,
   queueTurn,
-  advanceTick,
   resolveCollision,
-  buildRunResults,
-} = require("../src/supernova-snake/contracts/core-loop");
-const { createRunFixture } = require("./helpers/supernova-snake-fixtures");
+} from "../src/supernova-snake/contracts/core-loop.ts";
+import { createRunFixture } from "./helpers/supernova-snake-fixtures.ts";
 
 test("core loop remains deterministic for the same seed and input history", () => {
   const seed = "nova-alpha-001";
   const inputs = [
-    { tick: 42, direction: "left" },
-    { tick: 43, direction: "up" },
+    { tick: 42, direction: "left" as const },
+    { tick: 43, direction: "up" as const },
   ];
 
   const runA = createRunState({ seed });
   const runB = createRunState({ seed });
 
-  inputs.forEach((input) => {
+  for (const input of inputs) {
     queueTurn(runA, input);
     queueTurn(runB, input);
     advanceTick(runA);
     advanceTick(runB);
-  });
+  }
 
   assert.deepEqual(runA, runB);
 });
